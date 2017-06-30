@@ -24,7 +24,7 @@ public class InsertionSort {
 
 			int key = a[i];
 
-			for (int j = i - 1; j > p; j--) {
+			for (int j = i - 1; j >= p; j--) {
 
 				a[j + 1] = a[j];
 			}
