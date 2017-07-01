@@ -1,0 +1,156 @@
+/**
+*Creat By T.Cage
+*
+*
+*/
+import java.io.*;
+import java.util.ArrayList;
+import java.util.*;
+public class Qustion234{
+    public static int question2(String file_path)throws IOException{
+        char[][] ca=new char[8][8];
+        int max=0;
+        BufferedReader in= new BufferedReader(new FileReader(file_path));
+        for(int i=0;i<8;i++)
+            ca[i]=in.readLine().toCharArray();
+        
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if(ca[i][j]=='1'){
+                    int n=1;
+                    for(int a=i+1;a<8&&ca[a][j]=='1';a++)
+                        n++;
+                    if(n>max)
+                        max=n;
+
+                    n=1;
+                    for(int b=j+1;b<8&&ca[i][b]=='1';b++)
+                        n++;
+                    if(n>max)
+                        max=n;
+
+                    n=1;
+                    for(int a=i+1,b=j+1;a<8&&b<8&&
+                        ca[a][b]=='1';a++,b++)
+                        n++;
+                    if(n>max)
+                        max=n;
+
+                    for(int a=i+1,b=j-1;a<8&&b>0&&
+                        ca[a][b]=='1';a++,b--)
+                        n++;
+                    if(n>max)
+                        max=n;
+
+            }
+                }
+        }
+        in.close();
+        return max;
+    }
+    public static void question3(int num)throws IOException{
+        BufferedWriter out= new BufferedWriter(new FileWriter("out.txt"));
+        int flag=0;
+        for(int i=2;i<num;i++){
+            flag=1;
+            for(int j=2;j<=(int)Math.sqrt(i);j++)
+                if(i%j==0){
+                    flag=0;
+                    break;
+                }
+            if(1==flag){
+                out.write(String.valueOf(i));
+                out.newLine();
+                out.flush();
+            }
+        }
+        out.close();
+    }
+
+    public static int question4(int num)throws IOException{
+        BufferedWriter out= new BufferedWriter(new FileWriter("out2.txt"));
+        List<Integer>list=new ArrayList<Integer>();
+        int total=0;
+        int flag=0;
+        for(int i=2;i<num;i++){
+            flag=1;
+            for(int j=2;j<=(int)Math.sqrt(i);j++)
+                if(i%j==0){
+                    flag=0;
+                    break;
+                }
+            if(1==flag){
+                list.add(i);
+                String str_num=String.valueOf(i);
+                switch(str_num.length()){
+                    case 1:
+                    flag=0;
+                    break;
+                    case 2:
+                    if(list.contains(Integer.parseInt(str_num.substring(0,1)))
+                       &&list.contains(Integer.parseInt(str_num.substring(1,2))))
+                        flag=0;
+                    break;
+                    case 3:
+                    if(list.contains(Integer.parseInt(str_num.substring(0,1)))
+                       &&list.contains(Integer.parseInt(str_num.substring(1,2)))
+                       &&list.contains(Integer.parseInt(str_num.substring(2,3)))
+                       ||list.contains(Integer.parseInt(str_num.substring(0,2)))
+                       &&list.contains(Integer.parseInt(str_num.substring(2,3)))
+                       ||str_num.indexOf(1)!='0'
+                       &&list.contains(Integer.parseInt(str_num.substring(0,1)))
+                       &&list.contains(Integer.parseInt(str_num.substring(1,3))))
+                        flag=0;
+                    break;
+                    case 4:
+                    if(list.contains(Integer.parseInt(str_num.substring(0,1)))
+                       &&list.contains(Integer.parseInt(str_num.substring(1,2)))
+                       &&list.contains(Integer.parseInt(str_num.substring(2,3)))
+                       &&list.contains(Integer.parseInt(str_num.substring(3,4)))
+                       ||str_num.indexOf(1)!='0'
+                       &&list.contains(Integer.parseInt(str_num.substring(0,1)))
+                       &&list.contains(Integer.parseInt(str_num.substring(1,3)))
+                       &&list.contains(Integer.parseInt(str_num.substring(3,4)))
+                       ||str_num.indexOf(2)!='0'
+                       &&list.contains(Integer.parseInt(str_num.substring(0,1)))
+                       &&list.contains(Integer.parseInt(str_num.substring(1,2)))
+                       &&list.contains(Integer.parseInt(str_num.substring(2,4)))
+                       ||str_num.indexOf(1)!='0'
+                       &&list.contains(Integer.parseInt(str_num.substring(0,1)))
+                       &&list.contains(Integer.parseInt(str_num.substring(1,4)))
+                       ||list.contains(Integer.parseInt(str_num.substring(0,2)))
+                       &&list.contains(Integer.parseInt(str_num.substring(2,3)))
+                       &&list.contains(Integer.parseInt(str_num.substring(3,4)))
+                       ||str_num.indexOf(2)!='0'
+                       &&list.contains(Integer.parseInt(str_num.substring(0,2)))
+                       &&list.contains(Integer.parseInt(str_num.substring(2,4)))
+                       ||list.contains(Integer.parseInt(str_num.substring(0,3)))
+                       &&list.contains(Integer.parseInt(str_num.substring(3,4)))
+                       )
+                        flag=0;
+                        break;
+                    default:break;
+                }
+                if(0==flag){
+                    total++;
+                    out.write(String.valueOf(i));
+                    out.newLine();
+                    out.flush();
+                }
+            }
+        }
+        out.close();
+        return total;
+    }
+    public static void main(String[] args){
+        try{
+            // System.out.println(question2("a.txt"));
+            // System.out.println(question4(10000));
+            // question3(10000);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        System.out.println("Hello World!");
+    }
+}

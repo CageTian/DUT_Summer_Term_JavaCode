@@ -5,14 +5,14 @@ import java.util.*;
 	可以为这个类添加额外的方法及数据成员.
 	ID就是指学号, 下面的作者一定要写上你的名字和学号
 	作业中出现的示范数据abdc001需要改成学生的学号数据
-	@author  	YOUR NAME and ID
+	@author  	T.Cage and 201592465
 	@version	THE DATE
 **/
 
 public class TextZip {
 
 	//ID, 该学号的值需要修改!
-	private static final String ID = "abdc001";	
+	private static final String ID = "201592465";	
 	
 	
   /**
