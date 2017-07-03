@@ -48,6 +48,7 @@ public class Qustion234{
         in.close();
         return max;
     }
+
     public static void question3(int num)throws IOException{
         BufferedWriter out= new BufferedWriter(new FileWriter("out.txt"));
         int flag=0;
@@ -142,10 +143,59 @@ public class Qustion234{
         out.close();
         return total;
     }
+    public static int judge(String num,int length,int start,List<Integer> list){
+        //int length=num.length();
+        int flag=1;
+        if(1==length&&list.contains(Integer.parseInt(num)))
+            return 0;
+        else{
+            for(int i=start+1;i<=length;i++){
+                if (flag==0)
+                    return flag;
+                if(num.indexOf(0)!='0'&&list.contains(Integer.parseInt(num.substring(start,i)))){
+                    String sub_num=num.substring(i,num.length());
+                    if(sub_num.length()==0&&start!=0)
+                        return 0;
+                    else
+                        flag=judge(num,length,i,list);
+                }
+            }
+        }
+        return flag;
+    }
+    public static int question4_method2(int num)throws IOException{
+        BufferedWriter out= new BufferedWriter(new FileWriter("out3.txt"));
+        List<Integer>list=new ArrayList<Integer>();
+        int total=0;
+        int flag;
+        for(int i=2;i<num;i++){
+            flag=1;
+            for(int j=2;j<=(int)Math.sqrt(i);j++)
+                if(i%j==0){
+                    flag=0;
+                    break;
+                }
+            if(1==flag){
+                list.add(i);
+                String str_num=String.valueOf(i);
+                if(i==271)
+                    i=271;
+                flag=judge(str_num,str_num.length(),0,list);
+                if(0==flag){
+                    total++;
+                    out.write(String.valueOf(i));
+                    out.newLine();
+                    out.flush();
+                }
+            }
+        }
+        out.close();
+        return total;
+    }
     public static void main(String[] args){
         try{
             // System.out.println(question2("a.txt"));
-            // System.out.println(question4(10000));
+            System.out.println(question4_method2(10000));
             // question3(10000);
         }catch(IOException e){
             e.printStackTrace();
