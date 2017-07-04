@@ -98,7 +98,7 @@ public class Qustion234{
                        &&list.contains(Integer.parseInt(str_num.substring(2,3)))
                        ||list.contains(Integer.parseInt(str_num.substring(0,2)))
                        &&list.contains(Integer.parseInt(str_num.substring(2,3)))
-                       ||str_num.indexOf(1)!='0'
+                       ||str_num.charAt(1)!='0'
                        &&list.contains(Integer.parseInt(str_num.substring(0,1)))
                        &&list.contains(Integer.parseInt(str_num.substring(1,3))))
                         flag=0;
@@ -108,21 +108,21 @@ public class Qustion234{
                        &&list.contains(Integer.parseInt(str_num.substring(1,2)))
                        &&list.contains(Integer.parseInt(str_num.substring(2,3)))
                        &&list.contains(Integer.parseInt(str_num.substring(3,4)))
-                       ||str_num.indexOf(1)!='0'
+                       ||str_num.charAt(1)!='0'
                        &&list.contains(Integer.parseInt(str_num.substring(0,1)))
                        &&list.contains(Integer.parseInt(str_num.substring(1,3)))
                        &&list.contains(Integer.parseInt(str_num.substring(3,4)))
-                       ||str_num.indexOf(2)!='0'
+                       ||str_num.charAt(2)!='0'
                        &&list.contains(Integer.parseInt(str_num.substring(0,1)))
                        &&list.contains(Integer.parseInt(str_num.substring(1,2)))
                        &&list.contains(Integer.parseInt(str_num.substring(2,4)))
-                       ||str_num.indexOf(1)!='0'
+                       ||str_num.charAt(1)!='0'
                        &&list.contains(Integer.parseInt(str_num.substring(0,1)))
                        &&list.contains(Integer.parseInt(str_num.substring(1,4)))
                        ||list.contains(Integer.parseInt(str_num.substring(0,2)))
                        &&list.contains(Integer.parseInt(str_num.substring(2,3)))
                        &&list.contains(Integer.parseInt(str_num.substring(3,4)))
-                       ||str_num.indexOf(2)!='0'
+                       ||str_num.charAt(2)!='0'
                        &&list.contains(Integer.parseInt(str_num.substring(0,2)))
                        &&list.contains(Integer.parseInt(str_num.substring(2,4)))
                        ||list.contains(Integer.parseInt(str_num.substring(0,3)))
@@ -152,7 +152,7 @@ public class Qustion234{
             for(int i=start+1;i<=length;i++){
                 if (flag==0)
                     return flag;
-                if(num.indexOf(0)!='0'&&list.contains(Integer.parseInt(num.substring(start,i)))){
+                if(num.charAt(start)!='0'&&list.contains(Integer.parseInt(num.substring(start,i)))){
                     String sub_num=num.substring(i,num.length());
                     if(sub_num.length()==0&&start!=0)
                         return 0;
@@ -195,7 +195,7 @@ public class Qustion234{
     public static void main(String[] args){
         try{
             // System.out.println(question2("a.txt"));
-            System.out.println(question4_method2(10000));
+            System.out.println(question4(10000));
             // question3(10000);
         }catch(IOException e){
             e.printStackTrace();

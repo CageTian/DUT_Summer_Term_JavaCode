@@ -18,7 +18,7 @@ public class Line{
     }
     @Override
     public String toString(){
-        return "line[a=("+a.getX()+","+a.getY()+")b=("+b.getX()+","+b.getY()+")]";
+        return "line[a=("+a.getX()+","+a.getY()+"),b=("+b.getX()+","+b.getY()+")]";
     }
     public static void main(String[] args){
         Point p1=new Point(1,2);

@@ -50,13 +50,19 @@ public class MyFile extends File{
 
     public static void main(String[] args){
         if(args.length!=1)
-            System.out.println("please input the absolute file_path!");
+            System.out.println("Usage: input the absolute file_path!");
         else{
             MyFile main_dir=new MyFile(args[0]);
-            List<MyFile> ls=new ArrayList<MyFile>();
+            if(main_dir.isDirectory()){
+                List<MyFile> ls=new ArrayList<MyFile>();
             MyFile.isDuplicated(main_dir,new ArrayList<MyFile>(),ls);
             for(MyFile f:ls)
                 System.out.println("Duplicated:"+f.toString());
+            }
+            else{
+                System.out.println("please input the absolute file_path!");
+            }
+            
             // for(File file:main_dir.listFiles())
             // System.out.println(file.getName()+String.valueOf(file.length()));
             
