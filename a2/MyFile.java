@@ -56,6 +56,9 @@ public class MyFile extends File{
             if(main_dir.isDirectory()){
                 List<MyFile> ls=new ArrayList<MyFile>();
             MyFile.isDuplicated(main_dir,new ArrayList<MyFile>(),ls);
+            if(ls.size()==0){
+                System.out.println("no duplist");
+            }
             for(MyFile f:ls)
                 System.out.println("Duplicated:"+f.toString());
             }

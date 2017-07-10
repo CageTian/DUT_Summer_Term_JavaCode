@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.text.DecimalFormat;
 
 /**
  可以为这个类添加额外的方法及数据成员.
@@ -176,9 +177,16 @@ public class TextZip {
             }
         }
         iterator=list.iterator();
+        int ch_tmp;
         while(iterator.hasNext()){
             cf=iterator.next();
-            pw.write(cf.getChar()+" "+cf.getFreq()+"\n");
+            ch_tmp=cf.getChar();
+            if(ch_tmp==13)
+                pw.write("\\r"+" "+cf.getFreq()+"\n");
+            else if(ch_tmp==10)
+                pw.write("\\n"+" "+cf.getFreq()+"\n");
+            else
+                pw.write((char)ch_tmp+" "+cf.getFreq()+"\n");
         }
         Collections.sort(list);
         //pw.close();
@@ -292,7 +300,14 @@ public class TextZip {
         ArrayList<CharFreq>list=new ArrayList<>();
         String s=br.readLine();
         while (s!=null&&s.length()>2){
-            list.add(new CharFreq(s.charAt(0),Integer.parseInt(s.substring(2))));
+            if(s.substring(0,2).equals("\\r"))
+                list.add(new CharFreq((char)13,Integer.parseInt(s.substring(3))));
+            else if(s.substring(0,2).equals("\\n"))
+                list.add(new CharFreq((char)10,Integer.parseInt(s.substring(3))));
+            else
+                list.add(new CharFreq(s.charAt(0), Integer.parseInt(s.substring(2))));
+
+
             s=br.readLine();
         }
         Collections.sort(list);
@@ -341,20 +356,20 @@ public class TextZip {
 
             // Get the default prefix code tree
             TreeNode tn = abracadbraTree();
-
             // Decompress the default file "a.txz"
             decompress(br, tn, fw);
 
             // Close the ouput file
             fw.close();
             // Output the compression ratio
-            long a=new File("a.txz").length();
-            long b=new File("b.txt").length();
+            double a=new File("a.txz").length();
+            double b=new File("b.txt").length();
 
             System.out.println("a.txz decompressed by T.Cage\n" +
                     "Size of compressed file is:"+a+" bytes\n" +
                     "Size of original file is:"+b+" bytes\n" +
-                    "compression ratio is:"+String.format("%.14f", ((double)a*100/(double)b))+"%");
+                    "compression ratio is:"+
+                    new DecimalFormat("#.0000000000000").format(a*100/b)+"%");
             // Write your own implementation here.
 
         }
@@ -378,6 +393,7 @@ public class TextZip {
         }
 
         //program param: -c file.txt file.freq file.txz
+        //program param: -c file_1.txt file_1.freq file_1.txz
         else if (args[0].equals("-c")) {
 
             FileReader fr = new FileReader(args[1]);
@@ -404,18 +420,19 @@ public class TextZip {
 
             // then output the compression ratio
             // Write your own implementation here.
-            long a=new File(args[3]).length();
-            long b=new File(args[1]).length();
+            double a=new File(args[3]).length();
+            double b=new File(args[1]).length();
 
             System.out.println(args[1]+" compressed by T.Cage\n" +
                     "Size of compressed file is:"+a+" bytes\n" +
                     "Size of original file is:"+b+" bytes\n" +
-                    "compression ratio is:"+String.format("%.14f", ((double)a*100/(double)b))+"%");
+                    "compression ratio is:"+new DecimalFormat("#.0000000000000").format(a*100/b)+"%");
 
 
 
         }
         //program param: -d file.txz file.freq file2.txt
+        //program param: -d file_1.txz file_1.freq file_2.txt
         else if (args[0].equals("-d")) {
             ArrayList a = readFrequencies(args[2]);
             TreeNode tn = buildTree(a);
@@ -433,8 +450,6 @@ public class TextZip {
                     "Size of compressed file is:"+a1+" bytes\n" +
                     "Size of original file is:"+b1+" bytes\n" +
                     "compression ratio is:"+String.format("%.14f", ((double)a1*100/(double)b1))+"%");
-
-
 
         }
     }

@@ -36,7 +36,8 @@ public class Qustion234{
                     if(n>max)
                         max=n;
 
-                    for(int a=i+1,b=j-1;a<8&&b>0&&
+                    n=1;
+                    for(int a=i+1,b=j-1;a<8&&b>=0&&
                         ca[a][b]=='1';a++,b--)
                         n++;
                     if(n>max)
@@ -68,81 +69,7 @@ public class Qustion234{
         out.close();
     }
 
-    public static int question4(int num)throws IOException{
-        BufferedWriter out= new BufferedWriter(new FileWriter("out2.txt"));
-        List<Integer>list=new ArrayList<Integer>();
-        int total=0;
-        int flag=0;
-        for(int i=2;i<num;i++){
-            flag=1;
-            for(int j=2;j<=(int)Math.sqrt(i);j++)
-                if(i%j==0){
-                    flag=0;
-                    break;
-                }
-            if(1==flag){
-                list.add(i);
-                String str_num=String.valueOf(i);
-                switch(str_num.length()){
-                    case 1:
-                    flag=0;
-                    break;
-                    case 2:
-                    if(list.contains(Integer.parseInt(str_num.substring(0,1)))
-                       &&list.contains(Integer.parseInt(str_num.substring(1,2))))
-                        flag=0;
-                    break;
-                    case 3:
-                    if(list.contains(Integer.parseInt(str_num.substring(0,1)))
-                       &&list.contains(Integer.parseInt(str_num.substring(1,2)))
-                       &&list.contains(Integer.parseInt(str_num.substring(2,3)))
-                       ||list.contains(Integer.parseInt(str_num.substring(0,2)))
-                       &&list.contains(Integer.parseInt(str_num.substring(2,3)))
-                       ||str_num.charAt(1)!='0'
-                       &&list.contains(Integer.parseInt(str_num.substring(0,1)))
-                       &&list.contains(Integer.parseInt(str_num.substring(1,3))))
-                        flag=0;
-                    break;
-                    case 4:
-                    if(list.contains(Integer.parseInt(str_num.substring(0,1)))
-                       &&list.contains(Integer.parseInt(str_num.substring(1,2)))
-                       &&list.contains(Integer.parseInt(str_num.substring(2,3)))
-                       &&list.contains(Integer.parseInt(str_num.substring(3,4)))
-                       ||str_num.charAt(1)!='0'
-                       &&list.contains(Integer.parseInt(str_num.substring(0,1)))
-                       &&list.contains(Integer.parseInt(str_num.substring(1,3)))
-                       &&list.contains(Integer.parseInt(str_num.substring(3,4)))
-                       ||str_num.charAt(2)!='0'
-                       &&list.contains(Integer.parseInt(str_num.substring(0,1)))
-                       &&list.contains(Integer.parseInt(str_num.substring(1,2)))
-                       &&list.contains(Integer.parseInt(str_num.substring(2,4)))
-                       ||str_num.charAt(1)!='0'
-                       &&list.contains(Integer.parseInt(str_num.substring(0,1)))
-                       &&list.contains(Integer.parseInt(str_num.substring(1,4)))
-                       ||list.contains(Integer.parseInt(str_num.substring(0,2)))
-                       &&list.contains(Integer.parseInt(str_num.substring(2,3)))
-                       &&list.contains(Integer.parseInt(str_num.substring(3,4)))
-                       ||str_num.charAt(2)!='0'
-                       &&list.contains(Integer.parseInt(str_num.substring(0,2)))
-                       &&list.contains(Integer.parseInt(str_num.substring(2,4)))
-                       ||list.contains(Integer.parseInt(str_num.substring(0,3)))
-                       &&list.contains(Integer.parseInt(str_num.substring(3,4)))
-                       )
-                        flag=0;
-                        break;
-                    default:break;
-                }
-                if(0==flag){
-                    total++;
-                    out.write(String.valueOf(i));
-                    out.newLine();
-                    out.flush();
-                }
-            }
-        }
-        out.close();
-        return total;
-    }
+
     public static int judge(String num,int length,int start,List<Integer> list){
         //int length=num.length();
         int flag=1;
@@ -178,9 +105,8 @@ public class Qustion234{
             if(1==flag){
                 list.add(i);
                 String str_num=String.valueOf(i);
-                if(i==271)
-                    i=271;
-                flag=judge(str_num,str_num.length(),0,list);
+                if(str_num.length()>1)
+                    flag=judge(str_num,str_num.length(),0,list);
                 if(0==flag){
                     total++;
                     out.write(String.valueOf(i));
@@ -195,7 +121,7 @@ public class Qustion234{
     public static void main(String[] args){
         try{
             // System.out.println(question2("a.txt"));
-            System.out.println(question4(10000));
+            System.out.println(question4_method2(10000));
             // question3(10000);
         }catch(IOException e){
             e.printStackTrace();
